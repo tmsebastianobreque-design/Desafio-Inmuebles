@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      
+      <!-- Contenedor estético tipo Tarjeta limpia de Perfil -->
+      <div class="card shadow-sm p-5 bg-white rounded border-0">
+        
+        <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+          <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+            <span class="fs-3 fw-bold">{{ user.username|slice:":1"|upper }}</span>
+          </div>
+          <div>
+            <h2 class="fw-bold mb-0 text-dark">Mi Perfil</h2>
+            <p class="text-muted mb-0">Gestiona la información de tu cuenta</p>
+          </div>
+          <div class="ms-auto">
+            {% if perfil %}
+              <span class="badge bg-success p-2 text-capitalize fs-6">{{ perfil.tipo_usuario }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- Sección 1: Datos Personales -->
+          <div class="col-12 col-md-6">
+            <h5 class="fw-bold text-secondary mb-3">Información Personal</h5>
+            
+            <div class="mb-3">
+              <span class="text-muted d-block small fw-semibold">Nombres</span>
+              <span class="fs-5 text-dark fw-medium">{% firstof user.first_name "No especificado" %}</span>
+            </div>
+
+            <div class="mb-3">
+              <span class="text-muted d-block small fw-semibold">Apellidos</span>
+              <span class="fs-5 text-dark fw-medium">{% firstof user.last_name "No especificado" %}</span>
+            </div>
+
+            <div class="mb-3">
+              <span class="text-muted d-block small fw-semibold">RUT</span>
+              <span class="fs-5 text-dark fw-medium">{% firstof perfil.rut "No especificado" %}</span>
+            </div>
+          </div>
+
+          <!-- Sección 2: Contacto y Ubicación -->
+          <div class="col-12 col-md-6">
+            <h5 class="fw-bold text-secondary mb-3">Contacto y Ubicación</h5>
+
+            <div class="mb-3">
+              <span class="text-muted d-block small fw-semibold">Correo electrónico</span>
+              <span class="fs-5 text-dark fw-medium">{% firstof user.email "No especificado" %}</span>
+            </div>
+
+            <div class="mb-3">
+              <span class="text-muted d-block small fw-semibold">Teléfono personal</span>
+              <span class="fs-5 text-dark fw-medium">{% firstof perfil.telefono "No especificado" %}</span>
+            </div>
+
+            <div class="mb-3">
+              <span class="text-muted d-block small fw-semibold">Dirección</span>
+              <span class="fs-5 text-dark fw-medium">{% firstof perfil.direccion "No especificado" %}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alerta informativa si falta el perfil extendido -->
+        {% if not perfil %}
+          <div class="alert alert-warning mt-4 mb-2 d-flex align-items-center" role="alert">
+            <span class="me-2">⚠️</span>
+            <div>
+              Tu cuenta no tiene un perfil asociado. Por favor, actualiza tus datos.
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Botones de Acción -->
+        <div class="mt-5 pt-3 border-top d-flex gap-2 justify-content-end">
+          <a href="{% url 'gestion_inmuebles:home' %}" class="btn btn-light px-4 fw-semibold text-muted">Volver al Inicio</a>
+          <a href="{% url 'gestion_inmuebles:editar_perfil' %}" class="btn btn-primary px-4 fw-bold">Actualizar mis Datos</a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 mt-4 mb-5">
+      <div class="card shadow-sm p-4 bg-white rounded">
+        <h3 class="text-center mb-4 fw-bold text-primary">✏️ Publicar Nuevo Inmueble</h3>
+        
+        <form method="post" novalidate>
+          {% csrf_token %}
+          
+          <div class="row g-3">
+            {{ form.as_p }}
+          </div>
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+            <a href="{% url 'gestion_inmuebles:panel_arrendador' %}" class="btn btn-light px-4">Cancelar</a>
+            <button type="submit" class="btn btn-primary px-4 fw-bold">Guardar Propiedad</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

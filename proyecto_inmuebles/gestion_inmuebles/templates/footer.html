@@ -1,0 +1,52 @@
+<footer class="bg-dark text-light py-4 mt-auto border-top border-secondary">
+  <div class="container">
+    <div class="row align-items-center justify-content-between">
+      
+      <div class="col-12 col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <h5 class="fw-bold mb-1 text-white">🏠 InmueblesCl</h5>
+        <p class="small text-muted mb-0">
+          &copy; 2026 Gestión Inmobiliaria S.A. Todos los derechos reservados.
+        </p>
+      </div>
+
+      <!-- Lado Derecho: Enlaces de Utilidad y Roles -->
+      <div class="col-12 col-md-6 text-center text-md-end">
+        <ul class="list-inline mb-0 small">
+          <li class="list-inline-item me-3">
+            <a href="/" class="text-muted text-decoration-none hover-white">Inicio</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="list-inline-item me-3">
+              <a href="{% url 'gestion_inmuebles:perfil' %}" class="text-muted text-decoration-none">Mi Cuenta</a>
+            </li>
+            {% if user.usuario.tipo_usuario == 'arrendador' %}
+              <li class="list-inline-item">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Modo Propietario</span>
+              </li>
+            {% else %}
+              <li class="list-inline-item">
+                <span class="badge bg-success-subtle text-success border border-success-subtle">Modo Búsqueda</span>
+              </li>
+            {% endif %}
+          {% else %}
+            <li class="list-inline-item me-3">
+              <a href="{% url 'gestion_inmuebles:login' %}" class="text-muted text-decoration-none">Ingresar</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'gestion_inmuebles:registro' %}" class="text-muted text-decoration-none">Registrarse</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<!-- Pequeño estilo CSS para mejorar el comportamiento visual de los enlaces -->
+<style>
+  .hover-white:hover {
+    color: #fff !important;
+    transition: color 0.2s ease-in-out;
+  }
+</style>

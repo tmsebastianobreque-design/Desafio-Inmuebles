@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 mt-5 mb-5">
+      <div class="card shadow-sm p-4 bg-white rounded border-danger text-center">
+        <div class="fs-1 text-danger mb-3">⚠️</div>
+        <h3 class="fw-bold text-danger mb-3">¿Confirmar Eliminación?</h3>
+        <p class="text-muted">
+          Estás a punto de borrar definitivamente la propiedad <strong>{{ inmueble.nombre }}</strong> ubicada en <em>{{ inmueble.direccion }}</em>. Esta acción no se puede deshacer.
+        </p>
+        <hr class="my-4">
+        
+        <form method="post">
+          {% csrf_token %}
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-danger py-2 fw-bold">Sí, Eliminar Definitivamente</button>
+            <a href="{% url 'gestion_inmuebles:panel_arrendador' %}" class="btn btn-light py-2 fw-semibold text-muted">Cancelar y Volver</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

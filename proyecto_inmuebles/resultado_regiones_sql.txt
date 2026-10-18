@@ -1,0 +1,31 @@
+REGIÓN: Antofagasta
+==================================================
+Región: Antofagasta | Comuna: Antofagasta | Inmueble: Loft Cerro Alegre Valparaíso | Precio: $420000.00
+Región: Antofagasta | Comuna: Calama | Inmueble: Depto Exclusivo Las Condes | Precio: $1350000.00
+Región: Antofagasta | Comuna: Mejillones | Inmueble: Depto Poniente Viña del Mar | Precio: $680000.00
+Región: Antofagasta | Comuna: Ollagüe | Inmueble: Oficina Providencia | Precio: $890000.00
+Región: Antofagasta | Comuna: San Pedro de Atacama | Inmueble: Depto Barrio Italia Ñuñoa | Precio: $560000.00
+Región: Antofagasta | Comuna: Sierra Gorda | Inmueble: Casa Quinta Quilpué | Precio: $820000.00
+Región: Antofagasta | Comuna: Taltal | Inmueble: Studio Santiago Centro | Precio: $330000.00
+
+REGIÓN: Atacama
+==================================================
+Región: Atacama | Comuna: Chañaral | Inmueble: Parcela De Agrado Talca | Precio: $1100000.00
+Región: Atacama | Comuna: Freirina | Inmueble: Casa Residencial Temuco | Precio: $780000.00
+Región: Atacama | Comuna: Tierra Amarilla | Inmueble: Casa En Condominio Rancagua | Precio: $700000.00
+Región: Atacama | Comuna: Vallenar | Inmueble: Depto Centro Concepción | Precio: $450000.00
+
+REGIÓN: Coquimbo
+==================================================
+Región: Coquimbo | Comuna: Coquimbo | Inmueble: Casa Orilla De Lago Puerto Varas | Precio: $1400000.00
+Región: Coquimbo | Comuna: La Higuera | Inmueble: Depto Punta Arenas | Precio: $590000.00
+
+REGIÓN: Tarapacá
+==================================================
+Región: Tarapacá | Comuna: Alto Hospicio | Inmueble: Casa Vista al Mar Iquique | Precio: $950000.00
+Región: Tarapacá | Comuna: Camiña | Inmueble: Bodega Industrial Calama | Precio: $1200000.00
+Región: Tarapacá | Comuna: Colchane | Inmueble: Casa Familiar Copiapó | Precio: $600000.00
+Región: Tarapacá | Comuna: Huara | Inmueble: Depto Condominio La Serena | Precio: $480000.00
+Región: Tarapacá | Comuna: Iquique | Inmueble: Depto Central Arica | Precio: $380000.00
+Región: Tarapacá | Comuna: Pica | Inmueble: Local Comercial Coquimbo | Precio: $750000.00
+Región: Tarapacá | Comuna: Pozo Almonte | Inmueble: Oficina Comercial Antofagasta | Precio: $520000.00

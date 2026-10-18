@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-5 bg-white rounded border-0 mt-5">
+        <h1 class="fw-bold text-success mb-3">🔍 Catálogo de Propiedades Disponibles</h1>
+        <p class="lead text-muted">Explora la oferta total de inmuebles listos para ser arrendados.</p>
+        <hr class="my-4">
+        
+        {% if inmuebles %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for inm in inmuebles %}
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
+                            <!-- Banner estético según el tipo de propiedad -->
+                            <div class="p-4 text-center bg-dark text-white position-relative" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('https://unsplash.com'); background-size: cover; background-position: center; height: 140px;">
+                                <span class="position-absolute top-0 end-0 bg-success text-white px-3 py-1 m-2 rounded-pill small fw-semibold">${{ inm.precio_mensual }}/mes</span>
+                                <div class="fs-1 mt-2">
+                                    {% if inm.tipo_inmueble.nombre == "Casa" %}🏡{% else %}🏢{% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold text-dark mb-1">{{ inm.nombre }}</h5>
+                                <p class="text-muted small mb-3">📍 {{ inm.direccion }}, {{ inm.comuna.nombre }}</p>
+                                <p class="card-text text-muted small text-truncate-2">{{ inm.descripcion }}</p>
+                                
+                                <div class="bg-light p-2 rounded-3 mb-3 d-flex justify-content-between text-center text-muted small">
+                                    <div>🛏️ <br> {{ inm.habitaciones }} Hab</div>
+                                    <div>🚿 <br> {{ inm.banos }} Baños</div>
+                                    <div>📐 <br> {{ inm.m2_construidos }} m²</div>
+                                    <div>🚗 <br> {{ inm.estacionamientos }} Estac</div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer bg-white border-0 p-3 pt-0">
+                                <button class="btn btn-success w-100 fw-bold btn-sm">Contactar Propietario</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info text-start" role="alert">
+                Lo sentimos, en este momento no hay propiedades disponibles en el catálogo de arriendos.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

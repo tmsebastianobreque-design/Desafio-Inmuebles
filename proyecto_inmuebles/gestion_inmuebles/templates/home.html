@@ -1,0 +1,139 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %} 
+<div class="position-relative overflow-hidden m-md-3 text-center rounded shadow-sm" style="margin-top: 75px !important;"> 
+    
+    <!-- CONTENEDOR DEL CARRUSEL ANIMADO --> 
+    <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade position-absolute top-0 start-0 w-100 h-100" data-bs-ride="carousel" data-bs-interval="4000" style="z-index: 1;"> 
+        <div class="carousel-inner h-100"> 
+            
+           
+            {% with 'casa1.jpg' as img1 %}
+            <div class="carousel-item active h-100"> 
+                <div class="w-100 h-100" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('{% static img1 %}'); background-size: cover; background-position: center; min-height: 480px;"></div> 
+            </div> 
+            {% endwith %}
+            
+           
+            {% with 'casa2.jpg' as img2 %}
+            <div class="carousel-item h-100"> 
+                <div class="w-100 h-100" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('{% static img2 %}'); background-size: cover; background-position: center; min-height: 480px;"></div> 
+            </div> 
+            {% endwith %}
+            
+            
+            {% with 'casa3.jpg' as img3 %}
+            <div class="carousel-item h-100"> 
+                <div class="w-100 h-100" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('{% static img3 %}'); background-size: cover; background-position: center; min-height: 480px;"></div> 
+            </div> 
+            {% endwith %}
+
+        </div> 
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev" style="z-index: 3;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next" style="z-index: 3;">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+
+
+    TEXTO SUPERPUESTO 
+    <div class="position-relative col-md-6 p-lg-5 mx-auto my-5 text-white" style="z-index: 2; pointer-events: none;"> 
+        <h1 class="display-3 fw-bold mb-3">Encuentra tu próximo hogar</h1> 
+        <p class="lead fw-normal text-light mb-4">La plataforma digital más rápida y confiable para publicar y arrendar propiedades en todo el país.</p> 
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="pointer-events: auto;"> 
+            {% if not user.is_authenticated %} 
+                <a href="{% url 'gestion_inmuebles:login' %}" class="btn btn-primary btn-lg px-4 me-sm-3 fw-bold shadow">Comenzar Ahora</a> 
+                <a href="{% url 'gestion_inmuebles:registro' %}" class="btn btn-outline-light btn-lg px-4 fw-semibold shadow">Registrarse</a> 
+            {% else %} 
+                <a href="{% url 'gestion_inmuebles:inicio_exitoso' %}" class="btn btn-success btn-lg px-4 fw-bold shadow">Ir a mi Panel de Control</a> 
+            {% endif %} 
+        </div> 
+    </div> 
+
+</div>
+  
+
+<!-- Sección de Categorías / Tipos de Inmuebles --> 
+<div class="container my-5 py-4"> 
+    <div class="text-center mb-5"> 
+        <h2 class="fw-bold text-dark">Explora por Tipo de Propiedad</h2> 
+        <p class="text-muted lead">Descubre una amplia variedad de opciones que se adaptan perfectamente a tus necesidades.</p> 
+    </div> 
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4"> 
+        <!-- Tarjeta 1: Departamentos --> 
+        <div class="col"> 
+            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden text-center p-3"> 
+                <div class="fs-1 text-primary my-3">🏢</div> 
+                <div class="card-body"> 
+                    <h5 class="card-title fw-bold">Departamentos</h5> 
+                    <p class="card-text text-muted small">Estudios y departamentos familiares en las zonas más conectadas de la ciudad.</p> 
+                </div> 
+            </div> 
+        </div> 
+        <!-- Tarjeta 2: Casas --> 
+        <div class="col"> 
+            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden text-center p-3"> 
+                <div class="fs-1 text-success my-3">🏡</div> 
+                <div class="card-body"> 
+                    <h5 class="card-title fw-bold">Casas</h5> 
+                    <p class="card-text text-muted small">Espacios amplios, patios y total comodidad para ti y tu familia en barrios residenciales.</p> 
+                </div> 
+            </div> 
+        </div> 
+        <!-- Tarjeta 3: Oficinas y Locales --> 
+        <div class="col"> 
+            <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden text-center p-3"> 
+                <div class="fs-1 text-warning my-3">💼</div> 
+                <div class="card-body"> 
+                    <h5 class="card-title fw-bold">Comercial</h5> 
+                    <p class="card-text text-muted small">Oficinas, bodegas y locales comerciales estratégicos para hacer crecer tu negocio.</p> 
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+</div> 
+
+<!-- Sección Informativa / Beneficios de Doble Rol --> 
+<div class="bg-light py-5"> 
+    <div class="container my-4"> 
+        <div class="row align-items-center g-5"> 
+            <div class="col-lg-6"> 
+                <h2 class="fw-bold text-dark mb-4">¿Por qué elegir nuestra plataforma?</h2> 
+                
+                <div class="d-flex mb-4"> 
+                    <div class="fs-3 text-primary me-3">✔️</div> 
+                    <div> 
+                        <h5 class="fw-bold mb-1">Para Arrendadores</h5> 
+                        <p class="text-muted small mb-0">Publica tus inmuebles en minutos, administra precios y selecciona de forma segura a tus postulantes desde un panel centralizado.</p> 
+                    </div> 
+                </div> 
+                
+                <div class="d-flex mb-4"> 
+                    <div class="fs-3 text-success me-3">✔️</div> 
+                    <div> 
+                        <h5 class="fw-bold mb-1">Para Arrendatarios</h5> 
+                        <p class="text-muted small mb-0">Explora de manera transparente inmuebles validados, filtra por comunas y haz seguimiento en tiempo real a tus solicitudes de arriendo.</p> 
+                    </div> 
+                </div> 
+            </div> 
+            
+            <!-- Bloque Visual de Llamado a la Acción Derecho --> 
+            <div class="col-lg-6 text-center"> 
+                <div class="p-5 bg-white rounded-3 shadow-sm border text-start"> 
+                    <h4 class="fw-bold mb-3 text-dark">¿Eres Propietario?</h4> 
+                    <p class="text-muted small">Rentabiliza tus espacios de forma segura. Contamos con herramientas avanzadas para que mantengas el control absoluto de tus inmuebles públicos.</p> 
+                    <hr> 
+                    <a href="{% url 'gestion_inmuebles:registro' %}" class="btn btn-outline-primary w-100 fw-bold">Publicar una Propiedad</a> 
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+</div> 
+{% endblock %}

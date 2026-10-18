@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            
+            <div class="card shadow p-5 bg-white rounded border-0 mt-5">
+                
+                <!-- IDENTIFICACIÓN DINÁMICA DE BIENVENIDA -->
+                {% if perfil and perfil.tipo_usuario == 'arrendador' %}
+                    <div class="mb-4">
+                        <span class="display-3">🏢</span>
+                    </div>
+                    <h1 class="fw-bold text-primary mb-3">¡Bienvenido al Panel de Propietarios!</h1>
+                    <p class="lead text-muted">
+                        Hola, <strong>{{ user.first_name }} {{ user.last_name }}</strong>. Desde aquí puedes administrar tus inmuebles publicados, ajustar precios de arriendo y revisar las solicitudes de tus futuros arrendatarios.
+                    </p>
+                    
+                {% elif perfil and perfil.tipo_usuario == 'arrendatario' %}
+                    <div class="mb-4">
+                        <span class="display-3">🔍</span>
+                    </div>
+                    <h1 class="fw-bold text-success mb-3">¡Bienvenido a tu Centro de Búsqueda!</h1>
+                    <p class="lead text-muted">
+                        Hola, <strong>{{ user.first_name }} {{ user.last_name }}</strong>. Ya puedes explorar el catálogo completo de propiedades disponibles, guardar tus casas o departamentos favoritos y gestionar tus postulaciones activas.
+                    </p>
+                    
+                {% else %}
+                    <div class="mb-4">
+                        <span class="display-3">👋</span>
+                    </div>
+                    <h1 class="fw-bold text-dark mb-3">¡Inicio de Sesión Exitoso!</h1>
+                    <p class="lead text-muted">
+                        Bienvenido de vuelta, <strong>{{ user.username }}</strong>. Has ingresado correctamente al sistema de gestión inmobiliaria.
+                    </p>
+                {% endif %}
+                
+                <hr class="my-4">
+                
+                <!-- Resumen de Datos Obligatorios de la Rúbrica -->
+                {% if perfil %}
+                    <div class="bg-light p-4 rounded text-start mb-4">
+                        <h5 class="fw-bold text-secondary mb-3">Resumen de credenciales</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2"><strong>RUT registrado:</strong> {{ perfil.rut }}</li>
+                            <li class="mb-2"><strong>Teléfono de contacto:</strong> {{ perfil.telefono }}</li>
+                            <li class="mb-2"><strong>Dirección:</strong> {{ perfil.direccion }}</li>
+                            <li><strong>Tipo de cuenta:</strong> 
+                                <span class="badge {% if perfil.tipo_usuario == 'arrendador' %}bg-primary{% else %}bg-success{% endif %} text-capitalize">
+                                    {{ perfil.tipo_usuario }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+                
+                <!-- Botones de Acción Corregidos -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                    {% if perfil and perfil.tipo_usuario == 'arrendador' %}
+                        <a href="{% url 'gestion_inmuebles:panel_arrendador' %}" class="btn btn-primary px-4 fw-bold">Ir a mis Propiedades</a>
+                    {% elif perfil and perfil.tipo_usuario == 'arrendatario' %}
+                        <a href="{% url 'gestion_inmuebles:panel_arrendatario' %}" class="btn btn-success px-4 fw-bold">Explorar Arriendos</a>
+                    {% endif %}
+                    <a href="{% url 'gestion_inmuebles:perfil' %}" class="btn btn-outline-secondary px-4">Ver mi Perfil</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm p-5 bg-white rounded border-0">
+        <h1 class="fw-bold text-primary mb-3">Panel Exclusivo de Arrendadores</h1>
+        <p class="lead text-muted">Bienvenido al centro de administración para propietarios.</p>
+        <hr class="my-4">
+
+        <div class="row g-4">
+            <!-- Columna Izquierda: Gestionar mis Propiedades -->
+            <div class="col-md-6">
+                <div class="card p-4 bg-light rounded text-start h-100 border-0 shadow-sm">
+                    <h5 class="fw-bold text-dark">Gestionar mis Propiedades</h5>
+                    <p class="small text-muted">Aquí podrás publicar nuevos inmuebles, editar precios y cambiar la disponibilidad.</p>
+                    
+                    <!-- Corregido: Nombre de la URL según tu urls.py -->
+                    <a href="{% url 'gestion_inmuebles:agregar_inmueble' %}" class="btn btn-primary btn-sm mb-3">Añadir Inmueble</a>
+                    
+                    <!-- Contenedor del listado real de inmuebles -->
+                    <div class="list-group mt-2">
+                        {% for inmueble in mis_inmuebles %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center bg-white border rounded mb-2 shadow-sm p-3">
+                                <div>
+                                    <strong class="text-dark d-block">{{ inmueble.nombre }}</strong>
+                                    <!-- Corregido: .precio cambiado por .precio_mensual según tu modelo -->
+                                    <span class="text-muted small d-block">📍 {{ inmueble.comuna }} - ${{ inmueble.precio_mensual }}</span>
+                                </div>
+                                <div class="btn-group btn-group-sm">
+                                    <!-- Corregido: Nombres de las URLs según tu urls.py y pasando el .pk -->
+                                    <a href="{% url 'gestion_inmuebles:editar_inmueble' inmueble.pk %}" class="btn btn-warning text-white fw-bold">Editar</a>
+                                    <a href="{% url 'gestion_inmuebles:borrar_inmueble' inmueble.pk %}" class="btn btn-danger fw-bold">Eliminar</a>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="text-center py-4 bg-white rounded border border-dashed">
+                                <p class="text-muted small mb-0">⚠️ Aún no has registrado ninguna propiedad en la plataforma.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Solicitudes de Arriendo -->
+            <div class="col-md-6">
+                <div class="card p-4 bg-light rounded text-start h-100 border-0 shadow-sm">
+                    <h5 class="fw-bold text-dark">Solicitudes de Arriendo</h5>
+                    <p class="small text-muted">Revisa los perfiles de los interesados en tus departamentos o casas.</p>
+                    <button class="btn btn-outline-primary btn-sm mt-auto">Ver Solicitudes</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,79 @@
+COMUNA: Alto Hospicio
+========================================
+Casa Vista al Mar Iquique - Hermosa casa frente a Cavancha.
+
+COMUNA: Antofagasta
+========================================
+Loft Cerro Alegre Valparaíso - Loft con estilo patrimonial.
+
+COMUNA: Calama
+========================================
+Depto Exclusivo Las Condes - Alto estándar, vista despejada.
+
+COMUNA: Camiña
+========================================
+Bodega Industrial Calama - Amplia bodega apta para acopio.
+
+COMUNA: Chañaral
+========================================
+Parcela De Agrado Talca - Parcela de 5000 m2 con casa patronal.
+
+COMUNA: Colchane
+========================================
+Casa Familiar Copiapó - Casa acogedora en sector residencial.
+
+COMUNA: Coquimbo
+========================================
+Casa Orilla De Lago Puerto Varas - Vista privilegiada a los volcanes.
+
+COMUNA: Freirina
+========================================
+Casa Residencial Temuco - Barrio tranquilo sector Avenida Alemania.
+
+COMUNA: Huara
+========================================
+Depto Condominio La Serena - Depto con piscina y áreas verdes.
+
+COMUNA: Iquique
+========================================
+Depto Central Arica - Luminoso departamento amoblado.
+
+COMUNA: La Higuera
+========================================
+Depto Punta Arenas - Depto calefaccionado con termo panel.
+
+COMUNA: Mejillones
+========================================
+Depto Poniente Viña del Mar - A pasos de la playa y comercios.
+
+COMUNA: Ollagüe
+========================================
+Oficina Providencia - Planta libre sector Pedro de Valdivia.
+
+COMUNA: Pica
+========================================
+Local Comercial Coquimbo - Excelente vitrina comercial.
+
+COMUNA: Pozo Almonte
+========================================
+Oficina Comercial Antofagasta - Oficina ejecutiva sector centro.
+
+COMUNA: San Pedro de Atacama
+========================================
+Depto Barrio Italia Ñuñoa - Excelente conectividad y vida de barrio.
+
+COMUNA: Sierra Gorda
+========================================
+Casa Quinta Quilpué - Gran terreno con árboles frutales.
+
+COMUNA: Taltal
+========================================
+Studio Santiago Centro - Ideal estudiantes, cercano a Metro.
+
+COMUNA: Tierra Amarilla
+========================================
+Casa En Condominio Rancagua - Seguridad 24/7, plazas interiores.
+
+COMUNA: Vallenar
+========================================
+Depto Centro Concepción - Cercano a universidades y servicios.

@@ -1,0 +1,73 @@
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top shadow-sm">
+  <div class="container-fluid px-4">
+    
+    <!-- LADO IZQUIERDO: Marca o Logotipo -->
+    <a class="navbar-brand d-flex align-items-center fw-bold" href="/">
+      🏠 <span class="ms-2">InmueblesCl</span>
+    </a>
+
+    <!-- Botón Hamburguesa (Solo se verá en pantallas pequeñas/celulares) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavNavbarHorizontal" aria-controls="navbarNavNavbarHorizontal" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- CONTENEDOR DE ENLACES: Arriba en PC, colapsable en celulares -->
+    <div class="collapse navbar-collapse" id="navbarNavNavbarHorizontal">
+      
+      <!-- Enlaces del lado Izquierdo -->
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+      </ul>
+      
+      <!-- Enlaces del lado Derecho (Dinámicos según sesión) -->
+      <ul class="navbar-nav ms-auto align-items-md-center gap-2">
+        {% if user.is_authenticated %}
+          <!-- VISIBLE SOLO PARA LOGUEADOS -->
+          <li class="nav-item">
+            <a class="nav-link text-info fw-bold py-1 px-2" href="{% url 'gestion_inmuebles:inicio_exitoso' %}">👋 Panel de Inicio</a>
+          </li>
+
+          <!-- Validación de Rol Dinámica -->
+          {% if user.usuario.tipo_usuario == 'arrendador' %}
+            <li class="nav-item">
+              <a class="btn btn-outline-primary btn-sm text-white fw-semibold px-3" href="{% url 'gestion_inmuebles:panel_arrendador' %}">🏢 Mi Panel Propietario</a>
+            </li>
+          {% elif user.usuario.tipo_usuario == 'arrendatario' %}
+            <li class="nav-item">
+              <a class="btn btn-outline-success btn-sm text-white fw-semibold px-3" href="{% url 'gestion_inmuebles:panel_arrendatario' %}">🔍 Mi Panel Búsqueda</a>
+            </li>
+          {% endif %}
+
+          <li class="nav-item">
+            <a class="nav-link py-1" href="{% url 'gestion_inmuebles:perfil' %}">👤 Mi Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link py-1" href="{% url 'gestion_inmuebles:editar_perfil' %}">⚙️ Modificar Datos</a>
+          </li>
+          
+          <li class="nav-item ms-md-2">
+            <form action="{% url 'gestion_inmuebles:logout' %}" method="POST" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-outline-danger px-3 py-1">
+                Cerrar sesión
+              </button>
+            </form>
+          </li>
+          
+        {% else %}
+          <!-- VISIBLE SOLO PARA VISITANTES ANÓNIMOS -->
+          <li class="nav-item">
+            <a class="nav-link py-1" href="{% url 'gestion_inmuebles:login' %}">Iniciar sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary btn-sm px-3 fw-bold text-white" href="{% url 'gestion_inmuebles:registro' %}">Registrarse</a>
+          </li>
+        {% endif %}
+      </ul>
+
+    </div>
+  </div>
+</nav>
