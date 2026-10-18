@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 class Region(models.Model):
     nombre = models.CharField(max_length=100, unique=True, verbose_name="Nombre de la Región")
 
@@ -11,7 +10,8 @@ class Region(models.Model):
 
 
 class Comuna(models.Model):
-    nombre = models.CharField(max_length=100, unique=True, verbose_name="Nombre de la Comuna")
+   
+    nombre = models.CharField(max_length=100, verbose_name="Nombre de la Comuna")
     region = models.ForeignKey(
         Region,
         on_delete=models.CASCADE,
@@ -19,14 +19,12 @@ class Comuna(models.Model):
         verbose_name="Región"
     )
 
-
     def __str__(self):
         return self.nombre
 
 
 class TipoInmueble(models.Model):
     nombre = models.CharField(max_length=50, unique=True, verbose_name="Tipo de Inmueble")
-
     
     def __str__(self):
         return self.nombre
@@ -47,6 +45,16 @@ class Inmueble(models.Model):
     habitaciones = models.IntegerField()
     banos = models.IntegerField()
     direccion = models.CharField(max_length=200)
+    
+    
+    region = models.ForeignKey(
+        Region,
+        on_delete=models.CASCADE,
+        related_name='inmuebles',
+        verbose_name="Región",
+        null=True,
+        blank=True
+    )
     comuna = models.ForeignKey(
         Comuna, 
         on_delete=models.CASCADE, 
@@ -63,7 +71,6 @@ class Inmueble(models.Model):
     fecha_creacion = models.DateTimeField(null=True, blank=True)
     disponible = models.BooleanField(default=True)
 
-    
     def __str__(self):
         return self.nombre
 
@@ -98,7 +105,6 @@ class SolicitudArriendo(models.Model):
         related_name='solicitudes',
         verbose_name="Arrendatario Postulante"
     )
-    
     inmueble = models.ForeignKey(
         Inmueble, 
         on_delete=models.CASCADE, 
@@ -115,4 +121,5 @@ class SolicitudArriendo(models.Model):
 
     def __str__(self):
        return f"Solicitud de {self.arrendatario.user.username} para {self.inmueble.nombre} ({self.estado})"
+
 

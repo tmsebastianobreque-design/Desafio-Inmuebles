@@ -15,6 +15,7 @@ from django.views import View
 from .forms import RegistroForm
 from .forms import InmuebleForm
 from django.utils import timezone 
+from django.http import JsonResponse
 
 
 
@@ -413,3 +414,8 @@ def vista_borrar_inmueble(request, pk):
         return redirect('gestion_inmuebles:panel_arrendador')
         
     return render(request, 'borrar_inmueble.html', {'inmueble': inmueble})
+
+def cargar_comunas(request):
+    region_id = request.GET.get('region_id')
+    comunas = Comuna.objects.filter(region_id=region_id).order_by('nombre')
+    return JsonResponse(list(comunas.values('id', 'nombre')), safe=False)

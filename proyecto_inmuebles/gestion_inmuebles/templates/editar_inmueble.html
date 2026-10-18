@@ -2,25 +2,51 @@
 
 {% block content %}
 <div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8 mt-4 mb-5">
-      <div class="card shadow-sm p-4 bg-white rounded">
-        <h3 class="text-center mb-4 fw-bold text-warning">✏️ Modificar Propiedad: {{ inmueble.nombre }}</h3>
-        
-        <form method="post" novalidate>
-          {% csrf_token %}
-          
-          <div class="row g-3">
-            {{ form.as_p }}
-          </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 mt-4 mb-5">
+            <div class="card shadow-sm p-4 bg-white rounded">
+                <h3 class="text-center mb-4 fw-bold text-warning">📝 Modificar Propiedad: {{ inmueble.nombre }}</h3>
 
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-            <a href="{% url 'gestion_inmuebles:panel_arrendador' %}" class="btn btn-light px-4">Cancelar</a>
-            <button type="submit" class="btn btn-warning px-4 fw-bold">Guardar Cambios</button>
-          </div>
-        </form>
-      </div>
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <div class="row g-3">
+                        {{ form.as_p }}
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="{% url 'gestion_inmuebles:panel_arrendador' %}" class="btn btn-light px-4">Cancelar</a>
+                        <button type="submit" class="btn btn-warning px-4 fw-bold">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
+<!-- SCRIPT PARA EL MANEJO DINÁMICO DE REGIONES Y COMUNAS -->
+<script>
+    document.getElementById('id_region').addEventListener('change', function() {
+        const regionId = this.value;
+        const selectComuna = document.getElementById('id_comuna');
+        selectComuna.innerHTML = '<option value="">---------</option>';
+        
+        if (!regionId) return;
+
+        fetch(`/ajax/cargar-comunas/?region_id=${regionId}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Error en la respuesta del servidor');
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(comuna => {
+                    const option = document.createElement('option');
+                    option.value = comuna.id;
+                    option.textContent = comuna.nombre;
+                    selectComuna.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar comunas:', error));
+    });
+</script>
 {% endblock %}

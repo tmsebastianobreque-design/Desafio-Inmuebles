@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Usuario
-from .models import Inmueble
+from .models import Usuario, Inmueble, Comuna, Region
 
 class RegistroForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -35,7 +34,6 @@ class RegistroForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
-        # 1. Guardamos el objeto User base de Django
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password"])
         if commit:
@@ -65,11 +63,15 @@ class UserUpdateForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
+
 class InmuebleForm(forms.ModelForm):
     class Meta:
         model = Inmueble
-        # Usamos los nombres exactos de tu models.py
-        fields = ['nombre', 'descripcion', 'm2_construidos', 'm2_totales', 'estacionamientos', 'habitaciones', 'banos', 'direccion', 'comuna', 'tipo_inmueble', 'precio_mensual']
+        fields = [
+            'nombre', 'descripcion', 'm2_construidos', 'm2_totales', 
+            'estacionamientos', 'habitaciones', 'banos', 'direccion', 
+            'region', 'comuna', 'tipo_inmueble', 'precio_mensual'
+        ]
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
@@ -79,7 +81,26 @@ class InmuebleForm(forms.ModelForm):
             'habitaciones': forms.NumberInput(attrs={'class': 'form-control'}),
             'banos': forms.NumberInput(attrs={'class': 'form-control'}),
             'direccion': forms.TextInput(attrs={'class': 'form-control'}),
-            'comuna': forms.Select(attrs={'class': 'form-control'}),
+            'region': forms.Select(attrs={'class': 'form-control', 'id': 'id_region'}),
+            'comuna': forms.Select(attrs={'class': 'form-control', 'id': 'id_comuna'}),
             'tipo_inmueble': forms.Select(attrs={'class': 'form-control'}),
             'precio_mensual': forms.NumberInput(attrs={'class': 'form-control'})
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        #  Por defecto, vaciamos el queryset de comuna para que no cargue todo de golpe
+        self.fields['comuna'].queryset = Comuna.objects.none()
+
+        # Si hay datos enviados mediante POST/GET, filtramos según la región recibida
+        if 'region' in self.data:
+            try:
+                region_id = int(self.data.get('region'))
+                self.fields['comuna'].queryset = Comuna.objects.filter(region_id=region_id).order_by('nombre')
+            except (ValueError, TypeError):
+                pass
+        
+        # Si se está editando un inmueble que ya posee región guardada, precargamos sus comunas
+        elif self.instance.pk and self.instance.region:
+            self.fields['comuna'].queryset = self.instance.region.comunas.order_by('nombre')
